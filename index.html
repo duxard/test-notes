@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="newApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Notes</title>
+    <link rel="stylesheet" href="app/css/styles.css">
+    <script src="app/lib/angular.min.js"></script>
+    <script src="app/app.js"></script>
+</head>
+<body>
+    <div id="wrapper">
+        <div class="content">
+            <div class="notes" ng-controller="MainController">
+               <form ng-submit="addNote(newNote)" name="form" novalidate>
+                    <input id="title" type="text" placeholder="title" ng-model="newNote.title" ng-required="true"/>
+                    <input id="text" type="text" placeholder="text" ng-model="newNote.text" ng-required="true"/>
+                    <input type="submit" value="Add note" />
+                </form>
+                <button ng-click="order = 'title'">Order by title</button>
+                <button ng-click="order = 'index'">Order by index</button>
+                <ul>
+                    <li ng-repeat="item in notes | orderBy: order">
+                        <b>{{item.index}} {{item.title}}</b> | {{item.text}}
+                        <div class="remove" ng-click="removeNote(item)">x</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
